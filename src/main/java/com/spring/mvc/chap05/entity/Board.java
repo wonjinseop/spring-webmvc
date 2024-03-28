@@ -6,12 +6,12 @@ import lombok.*;
 import java.time.LocalDateTime;
 
 //CREATE TABLE tbl_board (
-//        boardNo INT PRIMARY KEY AUTO_INCREMENT,
-//        title VARCHAR(100) NOT NULL,
-//content VARCHAR(2000),
-//view_count INT,
-//reg_date DATETIME DEFAULT current_timestamp,
-//writer VARCHAR(50) NOT NULL
+//  boardNo INT PRIMARY KEY AUTO_INCREMENT,
+//  title VARCHAR(100) NOT NULL,
+//  content VARCHAR(2000),
+//  view_count INT,
+//  reg_date DATETIME DEFAULT current_timestamp,
+//  writer VARCHAR(50) NOT NULL
 //);
 
 @Getter @Setter
