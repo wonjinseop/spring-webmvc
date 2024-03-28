@@ -1,14 +1,13 @@
 package com.spring.mvc.chap05.controller;
 
 import com.spring.mvc.chap05.dto.request.BoardWriteRequestDTO;
+import com.spring.mvc.chap05.dto.response.BoardDetailResponseDTO;
 import com.spring.mvc.chap05.dto.response.BoardListResponseDTO;
 import com.spring.mvc.chap05.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -40,7 +39,7 @@ public class BoardController {
     
     // 3. 글쓰기 등록요청 (/board/write : POST)
     // BoardWriteRequestDTO를 활용하여 파라미터 처리 -> dto.request 패키지에 생성.
-    // 등록 완료 후에는 목록 조회 요청이 다시 들어오게끔 처리. redirect:/board/write
+    // 등록 완료 후에는 목록 조회 요청이 다시 들어오게끔 처리.
     @PostMapping("/write")
     public String write(BoardWriteRequestDTO dto) {
         System.out.println("/board/write: POST!");
@@ -52,9 +51,25 @@ public class BoardController {
     
     // 4. 글 삭제 요청 (/board/delete : GET)
     // 글번호 전달되면 삭제 진행.
+    @GetMapping("/delete")
+    public String delete(int bno) {
+        System.out.println("/board/delete: GET! " + bno);
+        service.delete(bno);
+        
+        return "redirect:/board/list";
+    }
     
     // 5. 글 상세보기 요청 (/board/detail : GET)
     // 글 번호 전달되면 해당 내용 상세보기 처리
     // chap05/detail.jsp
+    @GetMapping("/detail/{bno}")
+    public String detail(@PathVariable("bno") int bno, Model model) {
+        System.out.println("/board/detail: GET! " + bno);
+        BoardDetailResponseDTO dto = service.getDetail(bno);
+        
+        model.addAttribute("b", dto);
+        
+        return "chap05/detail";
+    }
     
 }

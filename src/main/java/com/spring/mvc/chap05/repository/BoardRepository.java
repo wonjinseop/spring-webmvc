@@ -18,4 +18,6 @@ public interface BoardRepository {
     // 게시물 삭제
     void delete(int boardNo);
     
+    // 조회수 처리
+    void updateViewCount(int bno);
 }

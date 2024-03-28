@@ -62,4 +62,12 @@ public class BoardRepositoryImpl implements BoardRepository {
         String sql = "DELETE FROM tbl_board WHERE boardNo = ?";
         template.update(sql, boardNo);
     }
+    
+    @Override
+    public void updateViewCount(int bno) {
+        String sql = "UPDATE tbl_board " +
+                "SET view_count = view_count + 1 " +
+                "WHERE boardNo = ?";
+        template.update(sql, bno);
+    }
 }
