@@ -7,6 +7,23 @@
     인터페이스의 전체 경로(패키지명 포함 클래스명)를 적는다. -->
 <mapper namespace="com.spring.mvc.chap05.mapper.BoardMapper">
 
+    <sql id="search">
+        <if test="type == 'title'">
+            WHERE title LIKE CONCAT('%', #{keyword}, '%')
+        </if>
+        <if test="type == 'content'">
+            WHERE content LIKE CONCAT('%', #{keyword}, '%')
+        </if>
+        <if test="type == 'writer'">
+            WHERE writer LIKE CONCAT('%', #{keyword}, '%')
+        </if>
+        <if test="type == 'tc'">
+            WHERE title LIKE CONCAT('%', #{keyword}, '%')
+            OR content LIKE CONCAT('%', #{keyword}, '%')
+        </if>
+    </sql>
+
+
     <!-- 구현하고자 하는 인터페이스에 명세된 추상 메서드별로 SQL을 작성. -->
     <!-- id에는 추상메서드 이름을 적음. -->
     <!-- SQL 작성할 때 값을 전달하는 방법은
@@ -21,13 +38,13 @@
 
     <delete id="delete">
         DELETE FROM tbl_board
-        WHERE boardNo=#{boardNo}
+        WHERE board_no=#{boardNo}
     </delete>
 
     <update id="updateViewCount">
         UPDATE tbl_board
         SET view_count = view_count + 1
-        WHERE boardNo = #{bno}
+        WHERE board_no = #{bno}
     </update>
 
     <!-- SELECT의 경우에는 반환되는 타입을 작성해 주어야 합니다.
@@ -38,18 +55,22 @@
         resultType에 List를 따로 언급할 필요 없습니다. -->
     <select id="findAll" resultType="board">
         SELECT * FROM tbl_board
-        ORDER BY boardNo DESC
+
+        <include refid="search" />
+
+        ORDER BY board_no DESC
         LIMIT #{pageStart}, #{amount}
     </select>
 
     <select id="findOne" resultType="board">
         SELECT * FROM tbl_board
-        WHERE boardNo = #{boardNo}
+        WHERE board_no = #{boardNo}
     </select>
 
     <select id="getCount" resultType="int">
         SELECT COUNT(*)
         FROM tbl_board
+        <include refid="search" />
     </select>
 
 

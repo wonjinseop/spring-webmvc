@@ -20,7 +20,7 @@ public class BoardRepositoryImpl implements BoardRepository {
         @Override
         public Board mapRow(ResultSet rs, int rowNum) throws SQLException {
             Board board = new Board(
-                    rs.getInt("boardNo"),
+                    rs.getInt("board_no"),
                     rs.getString("title"),
                     rs.getString("content"),
                     rs.getInt("view_count"),
@@ -33,14 +33,14 @@ public class BoardRepositoryImpl implements BoardRepository {
     
     @Override
     public List<Board> findAll() {
-        String sql = "SELECT * FROM tbl_board ORDER BY boardNo DESC";
+        String sql = "SELECT * FROM tbl_board ORDER BY board_no DESC";
         
         return template.query(sql, new BoardMapper());
     }
     
     @Override
     public Board findOne(int boardNo) {
-        String sql = "SELECT * FROM tbl_board WHERE boardNo = ?";
+        String sql = "SELECT * FROM tbl_board WHERE board_no = ?";
         try {
             return template.queryForObject(sql, new BoardMapper(), boardNo);
         } catch (DataAccessException e) {
@@ -59,7 +59,7 @@ public class BoardRepositoryImpl implements BoardRepository {
     
     @Override
     public void delete(int boardNo) {
-        String sql = "DELETE FROM tbl_board WHERE boardNo = ?";
+        String sql = "DELETE FROM tbl_board WHERE board_no = ?";
         template.update(sql, boardNo);
     }
     
@@ -67,7 +67,7 @@ public class BoardRepositoryImpl implements BoardRepository {
     public void updateViewCount(int bno) {
         String sql = "UPDATE tbl_board " +
                 "SET view_count = view_count + 1 " +
-                "WHERE boardNo = ?";
+                "WHERE board_no = ?";
         template.update(sql, bno);
     }
 }
