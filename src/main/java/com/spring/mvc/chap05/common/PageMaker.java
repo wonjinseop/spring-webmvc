@@ -1,5 +1,10 @@
 package com.spring.mvc.chap05.common;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+@Getter @ToString
 public class PageMaker {
 
     // 페이지 시작번호와 끝번호 (1~10, 11~20)
