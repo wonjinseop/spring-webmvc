@@ -1,5 +1,6 @@
 package com.spring.mvc.chap05.mapper;
 
+import com.spring.mvc.chap05.common.Page;
 import com.spring.mvc.chap05.entity.Board;
 import com.spring.mvc.chap05.entity.Reply;
 import org.junit.jupiter.api.DisplayName;
@@ -50,6 +51,8 @@ class ReplyMapperTest {
     void findAllTest() {
         // given
         int boardNo = 77;
+        Page page = new Page();
+        
         // when
         List<Reply> replyList = replyMapper.findAll(boardNo, page);
         System.out.println(replyList);
