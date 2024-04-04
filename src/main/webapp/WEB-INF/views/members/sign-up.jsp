@@ -148,12 +148,14 @@
         $idInput.style.borderColor = 'red';
         document.getElementById('idChk').innerHTML = '<b style="color: red;">[아이디는 필수값입니다!]</b>';
         checkResultList[0] = false;
+
         } else if (!accountPattern.test(idValue)) {
           // 정규표현식의 함수 test를 통해서 입력값이 패턴에 유효한지를 검증.
           // 패턴과 일치하는 입력값이면 true, 하나라도 어긋난다면 false.
           $idInput.style.borderColor = 'red';
           document.getElementById('idChk').innerHTML = '<b style="color: red;">[아이디는 4~14글자의 영문, 숫자로 입력하세요!]</b>';
           checkResultList[0] = false;
+
         } else {
           // 비동기 요청으로 아이디 중복 확인 진행
           fetch('/members/check/account/' + idValue)
@@ -163,6 +165,7 @@
                 $idInput.style.borderColor = 'red';
                 document.getElementById('idChk').innerHTML = '<b style="color: red;">[아이디가 중복되었습니다.]</b>';
                 checkResultList[0] = false;
+
               } else {
                 $idInput.style.borderColor = 'skyblue';
                 document.getElementById('idChk').innerHTML = '<b style="color: skyblue;">[사용 가능한 아이디입니다.]</b>';
@@ -183,10 +186,12 @@
           $pwInput.style.borderColor = 'red';
           document.getElementById('pwChk').innerHTML = '<b style="color: red;">[비밀번호는 필수값입니다!]</b>';
           checkResultList[1] = false;
+
         } else if (!passwordPattern.test(pwValue)) {
           $pwInput.style.borderColor = 'red';
           document.getElementById('pwChk').innerHTML = '<b style="color: red;">[특수문자 포함 8자 이상!]</b>';
           checkResultList[1] = false;
+
         } else {
           $pwInput.style.borderColor = 'skyblue';
           document.getElementById('pwChk').innerHTML = '<b style="color: skyblue;">[사용가능한 비밀번호입니다.]</b>';
@@ -202,10 +207,12 @@
           $pwCheckInput.style.borderColor = 'red';
           document.getElementById('pwChk2').innerHTML = '<b style="color: red;">[비밀번호 확인란은 필수값입니다!]</b>';
           checkResultList[2] = false;
+
         } else if ($pwCheckInput.value !== $pwInput.value) {
           $pwCheckInput.style.borderColor = 'red';
           document.getElementById('pwChk2').innerHTML = '<b style="color: red;">[위에랑 똑같이 쓰세요!]</b>';
           checkResultList[2] = false;
+
         } else {
           $pwCheckInput.style.borderColor = 'skyblue';
           document.getElementById('pwChk2').innerHTML = '<b style="color: skyblue;">[참 잘했어요~]</b>';
@@ -224,10 +231,12 @@
           $nameInput.style.borderColor = 'red';
           document.getElementById('nameChk').innerHTML = '<b style="color: red;">[이름은 필수정보!]</b>';
           checkResultList[3] = false;
+
         } else if (!namePattern.test(nameValue)) {
           $nameInput.style.borderColor = 'red';
           document.getElementById('nameChk').innerHTML = '<b style="color: red;">[이름은 한글로 ~]</b>';
           checkResultList[3] = false;
+
         } else {
           $nameInput.style.borderColor = 'skyblue';
           document.getElementById('nameChk').innerHTML = '<b style="color: skyblue;">[사용가능한 이름입니다.]</b>';
@@ -245,10 +254,12 @@
           $emailInput.style.borderColor = 'red';
           document.getElementById('emailChk').innerHTML = '<b style="color: red;">[이메일 필수값입니다!]</b>';
           checkResultList[4] = false;
+
         } else if (!emailPattern.test(emailValue)) {
           $emailInput.style.borderColor = 'red';
           document.getElementById('emailChk').innerHTML = '<b style="color: red;">[이메일 형식을 지켜주세요~]</b>';
           checkResultList[4] = false;
+
         } else {
           fetch('/members/check/email/' + emailValue)
                   .then(res => res.json())
@@ -257,6 +268,7 @@
                       $emailInput.style.borderColor = 'red';
                       document.getElementById('emailChk').innerHTML = '<b style="color: red;">[이메일이 중복되었습니다.]</b>';
                       checkResultList[4] = false;
+                      
                     } else {
                       $emailInput.style.borderColor = 'skyblue';
                       document.getElementById('emailChk').innerHTML = '<b style="color: skyblue;">[사용가능한 이메일입니다.]</b>';
