@@ -70,7 +70,7 @@ public class MemberController {
                          ) {
         log.info("/members/sign-in: POST!, dto: {}", dto);
         
-        LoginResult result = memberService.authenticate(dto);
+        LoginResult result = memberService.authenticate(dto, request.getSession(), response);
         log.info("result: {}", result);
         
         ra.addFlashAttribute("result" ,result);
