@@ -1,6 +1,7 @@
 package com.spring.mvc.config;
 
 import com.spring.mvc.interseptor.AfterLoginInterceptor;
+import com.spring.mvc.interseptor.AutoLoginInterceptor;
 import com.spring.mvc.interseptor.BoardInterceptor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
@@ -14,6 +15,7 @@ public class InterceptorConfig implements WebMvcConfigurer {
     
     private final AfterLoginInterceptor afterLoginInterceptor;
     private final BoardInterceptor boardInterceptor;
+    private final AutoLoginInterceptor autoLoginInterceptor;
     
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
@@ -27,6 +29,10 @@ public class InterceptorConfig implements WebMvcConfigurer {
                 .addInterceptor(boardInterceptor)
                 .addPathPatterns("/board/*")
                 .excludePathPatterns("/board/list", "/board/detail"); // 인터셉터 발동을 제외할 패턴.
+        
+        registry
+                .addInterceptor(autoLoginInterceptor)
+                .addPathPatterns("/**");
         
     }
 }
