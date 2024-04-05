@@ -11,13 +11,22 @@ package com.spring.mvc.chap05.entity;
         CONSTRAINT fk_reply FOREIGN KEY(board_no) REFERENCES tbl_board(board_no)
         ON DELETE CASCADE
     );
+    
+    ALTER TABLE tbl_reply
+    ADD account VARCHAR(50);
+    
+    ALTER TABLE tbl_reply
+    ADD CONSTRAINT fk_reply_account
+    FOREIGN KEY (account)
+    REFERENCES tbl_member (account)
+    ON DELETE CASCADE;
 */
 
 import lombok.*;
 
 import java.time.LocalDateTime;
 
-@Setter @Getter @ToString
+@Getter @ToString
 @EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
@@ -25,10 +34,20 @@ import java.time.LocalDateTime;
 public class Reply {
     
     private int replyNo;
+    
+    @Setter
     private String replyText;
+    
+    @Setter
     private String replyWriter;
+    
     private LocalDateTime replyDate;
+    
     private int boardNo;
+    
     private LocalDateTime updateDate;
+    
+    @Setter
+    private String account;
     
 }
