@@ -50,4 +50,6 @@ public class Reply {
     @Setter
     private String account;
     
+    private String profileImage;
+    
 }
