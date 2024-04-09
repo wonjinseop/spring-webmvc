@@ -41,11 +41,13 @@ public class SnsLoginController {
         // 인가 코드를 가지고 카카오 인증 서버에 토큰 발급 요청을 보내자 (server to server 통신)
         // 서비스에게 시킬 것임.
         Map<String, String> params = new HashMap<>();
-        params.put("appkey", kakaoAppKey);
+        params.put("appKey", kakaoAppKey);
         params.put("redirect", kakaoRedirectUri);
         params.put("code", code);
         
         service.kakoLogin(params);
+        
+        return "";
     }
     
 }
