@@ -2,6 +2,7 @@ package com.spring.mvc.chap05.service;
 
 import com.spring.mvc.chap05.dto.request.SignUpRequestDTO;
 import com.spring.mvc.chap05.dto.response.KakaoUserResponseDTO;
+import com.spring.mvc.chap05.entity.Member;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -36,7 +37,7 @@ public class SnsLoginService {
         String email = dto.getAccount().getEmail();
         log.info("이메일: {}", email);
         
-        // 회둰 중복확인 (이메일)
+        // 회원 중복확인 (이메일)
         if (!memberService.checkDuplicateValue("email", email)) {
             // 한번도 카카오 로그인을 한 적이 없다면 회원가입이 들어간다.
             memberService.join(
@@ -45,6 +46,7 @@ public class SnsLoginService {
                             .password("0000")
                             .name(dto.getProperties().getNickname())
                             .email(email)
+                            .loginMethod(Member.LoginMethod.KAKAO)
                             .build(),
                     dto.getProperties().getProfileImage()
             );
