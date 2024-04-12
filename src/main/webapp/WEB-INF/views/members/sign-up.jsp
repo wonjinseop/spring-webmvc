@@ -142,7 +142,7 @@
                     <td><input type="email" name="email" id="user_email"
                                class="form-control tooltipstered" required="required" aria-required="true"
                                style="margin-bottom: 25px; width: 100%; height: 40px; border: 1px solid #d9d9de"
-                               placeholder="ex) abc@mvc.com"></td>
+                               placeholder="ex) abc@mvc.com">
                   </tr>
 
 
